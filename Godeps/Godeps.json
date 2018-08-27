@@ -1,0 +1,25 @@
+{
+	"ImportPath": "tester",
+	"GoVersion": "go1.9",
+	"GodepVersion": "v80",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.6.2-5-ge48e440",
+			"Rev": "e48e440e4c92e3251d812f8ce7858944dfa3331c"
+		},
+		{
+			"ImportPath": "github.com/gorilla/rpc",
+			"Comment": "v1.1.0-7-g5c13781",
+			"Rev": "5c1378103183095acc1b9289ac1475e3bc1e818e"
+		},
+		{
+			"ImportPath": "github.com/gorilla/rpc/json",
+			"Comment": "v1.1.0-7-g5c13781",
+			"Rev": "5c1378103183095acc1b9289ac1475e3bc1e818e"
+		}
+	]
+}
