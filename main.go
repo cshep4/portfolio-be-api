@@ -6,6 +6,7 @@ import (
 	"tester/app/sms"
 	"tester/app/service"
 	"tester/app/email"
+	"os"
 )
 
 func main() {
@@ -14,5 +15,5 @@ func main() {
 	service.Route(router, new(sms.SmsService))
 	service.Route(router, new(email.EmailService))
 
-	http.ListenAndServe(":1337", router)
+	http.ListenAndServe(":" + os.Getenv("PORT"), router)
 }
