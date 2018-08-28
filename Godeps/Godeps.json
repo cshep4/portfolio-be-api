@@ -1,7 +1,10 @@
 {
-	"ImportPath": "go-tester",
+	"ImportPath": "portfolio-be",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v80",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/gorilla/mux",
@@ -17,6 +20,21 @@
 			"ImportPath": "github.com/gorilla/rpc/json",
 			"Comment": "v1.1.0-7-g5c13781",
 			"Rev": "5c1378103183095acc1b9289ac1475e3bc1e818e"
+		},
+		{
+			"ImportPath": "github.com/sendgrid/rest",
+			"Comment": "v2.4.1",
+			"Rev": "306b9bef57dc36f3435ccfcc08fe6ae2c6920344"
+		},
+		{
+			"ImportPath": "github.com/sendgrid/sendgrid-go",
+			"Comment": "v3.4.1-152-g25e917a",
+			"Rev": "25e917a8bc61c625dfbab9aafb3d90cfa9c0309b"
+		},
+		{
+			"ImportPath": "github.com/sendgrid/sendgrid-go/helpers/mail",
+			"Comment": "v3.4.1-152-g25e917a",
+			"Rev": "25e917a8bc61c625dfbab9aafb3d90cfa9c0309b"
 		}
 	]
 }
