@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/gorilla/mux"
 	"net/http"
-	"tester/app/sms"
-	"tester/app/service"
-	"tester/app/email"
+	"go-tester/app/sms"
+	"go-tester/app/service"
+	"go-tester/app/email"
 	"os"
 )
 
