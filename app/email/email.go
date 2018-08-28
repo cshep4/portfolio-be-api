@@ -29,7 +29,7 @@ func (t *EmailService) SendEmail(r *http.Request, args *EmailArgs, result *Respo
 
 	plainTextContent := args.Content
 
-	htmlContent := "<p>" + args.Content + "</p>"
+	htmlContent := "<strong>" + args.Content + "</strong>"
 
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 
