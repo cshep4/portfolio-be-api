@@ -1,5 +1,5 @@
 {
-	"ImportPath": "portfolio-be",
+	"ImportPath": "portfolio-be-api",
 	"GoVersion": "go1.9",
 	"GodepVersion": "v80",
 	"Packages": [
