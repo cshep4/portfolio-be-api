@@ -7,6 +7,7 @@ import (
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"errors"
+	"portfolio-be-api/app/service"
 )
 
 type EmailService struct{}
@@ -16,12 +17,7 @@ type EmailArgs struct {
 	To, From, Sender, Recipient, Subject, Content string
 }
 
-type Response struct {
-	StatusCode int
-	Body string
-}
-
-func (t *EmailService) SendEmail(r *http.Request, args *EmailArgs, result *Response) error {
+func (t *EmailService) SendEmail(r *http.Request, args *EmailArgs, result *service.Response) error {
 	from := mail.NewEmail(args.Sender, args.From)
 	subject := args.Subject
 
@@ -44,7 +40,7 @@ func (t *EmailService) SendEmail(r *http.Request, args *EmailArgs, result *Respo
 		return errors.New(response.Body)
 	}
 
-	*result = Response{StatusCode:response.StatusCode, Body:response.Body}
+	*result = service.Response{StatusCode:response.StatusCode, Body:response.Body}
 
 	return nil
 }
