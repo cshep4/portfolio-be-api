@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	headersOk := handlers.AllowedHeaders([]string{"**"})
-	originsOk := handlers.AllowedOrigins([]string{"**"})
-	methodsOk := handlers.AllowedMethods([]string{"GET", "POST", "OPTIONS"})
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"})
+	originsOk := handlers.AllowedOrigins([]string{"*"})
+	methodsOk := handlers.AllowedMethods([]string{"POST", "OPTIONS"})
 
 	router := mux.NewRouter()
 
