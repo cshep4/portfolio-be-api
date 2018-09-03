@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	headersOk := handlers.AllowedHeaders([]string{"*"})
-	originsOk := handlers.AllowedOrigins([]string{"*"})
-	methodsOk := handlers.AllowedMethods([]string{"*"})
+	headersOk := handlers.AllowedHeaders([]string{"**"})
+	originsOk := handlers.AllowedOrigins([]string{"**"})
+	methodsOk := handlers.AllowedMethods([]string{"POST", "OPTIONS"})
 
 	router := mux.NewRouter()
 
