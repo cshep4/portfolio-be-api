@@ -3,11 +3,11 @@ package email
 import (
 	"net/http"
 	"os"
-
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"errors"
 	"portfolio-be-api/app/service"
+	"strings"
 )
 
 type EmailService struct{}
@@ -25,7 +25,9 @@ func (t *EmailService) SendEmail(r *http.Request, args *EmailArgs, result *servi
 
 	plainTextContent := args.Content
 
-	message := mail.NewSingleEmail(from, subject, to, plainTextContent, plainTextContent)
+	htmlContent := strings.Replace(args.Content,"\n","<br>",-1)
+
+	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 
 	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
 	response, err := client.Send(message)
