@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Access-Control-Allow-Origin"})
+	headersOk := handlers.AllowedHeaders([]string{"**"})
 	originsOk := handlers.AllowedOrigins([]string{"**"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST", "OPTIONS"})
 
