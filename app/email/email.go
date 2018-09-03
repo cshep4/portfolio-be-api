@@ -25,9 +25,7 @@ func (t *EmailService) SendEmail(r *http.Request, args *EmailArgs, result *servi
 
 	plainTextContent := args.Content
 
-	htmlContent := "<strong>" + args.Content + "</strong>"
-
-	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+	message := mail.NewSingleEmail(from, subject, to, plainTextContent, plainTextContent)
 
 	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_API_KEY"))
 	response, err := client.Send(message)
