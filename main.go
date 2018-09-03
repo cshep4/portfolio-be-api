@@ -13,7 +13,7 @@ import (
 func main() {
 	headersOk := handlers.AllowedHeaders([]string{"*"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
-	methodsOk := handlers.AllowedMethods([]string{"POST", "OPTIONS"})
+	methodsOk := handlers.AllowedMethods([]string{"*"})
 
 	router := mux.NewRouter()
 
