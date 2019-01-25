@@ -1,20 +1,36 @@
 package database
 
 import (
-	//"fmt"
 	"database/sql"
-	//"os"
 	"github.com/lib/pq"
+	_ "github.com/go-sql-driver/mysql"
+	"os"
 )
 
-//func ConnectDb(host string, port string, user string, password string, dbname string) (*sql.DB, error) {
-//	sqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=require", host, port, user, password, dbname)
-//
-//	return sql.Open("postgres", sqlInfo)
-//}
+const QUERY_GET_COUNT = "SELECT COUNT(*) as count FROM users"
 
-func ConnectDb(url string) (*sql.DB, error) {
-	//url := os.Getenv("DATABASE_URL")
+func ConnectDb(appName string) (*sql.DB, error, string) {
+	db, err := connect(appName)
+
+	return db, err, QUERY_GET_COUNT
+}
+
+func connect(appName string) (*sql.DB, error) {
+	url := getDbCredentials(appName)
+
+	return connectPostgres(url)
+}
+
+
+func getDbCredentials(appName string) string {
+	if appName == "PremierPredictor" {
+		return os.Getenv("DATABASE_URL")
+	} else {
+		return os.Getenv("HEROKU_POSTGRESQL_GRAY_URL")
+	}
+}
+
+func connectPostgres(url string) (*sql.DB, error) {
 	connection, _ := pq.ParseURL(url)
 	connection += " sslmode=require"
 

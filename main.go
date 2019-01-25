@@ -1,24 +1,33 @@
 package main
 
 import (
-	"github.com/gorilla/handlers"
-	"github.com/gorilla/mux"
-	"net/http"
-	"portfolio-be-api/app/service"
-	"portfolio-be-api/app/email"
-	"os"
-	"portfolio-be-api/app/predictor"
+	"encoding/json"
+	"fmt"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
+	"portfolio-be-api/app/request"
+	"portfolio-be-api/app/router"
 )
 
+func Handler(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	fmt.Printf("Processing Lambda req %s\n", req.RequestContext.RequestID)
+
+	fmt.Printf("Chris::Request: %s\n", req)
+
+	if len(req.Body) < 1 {
+		return events.APIGatewayProxyResponse{StatusCode: 400, Headers: map[string]string{"Content-Type": "application/json","Access-Control-Allow-Origin": "*" }}, nil
+	}
+
+	var body request.RequestBody
+	err := json.Unmarshal([]byte(req.Body), &body)
+
+	if err != nil {
+		return events.APIGatewayProxyResponse{StatusCode: 400, Headers: map[string]string{"Content-Type": "application/json","Access-Control-Allow-Origin": "*" }}, nil
+	}
+
+	return router.Process(req.Path, body)
+}
+
 func main() {
-	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"})
-	originsOk := handlers.AllowedOrigins([]string{"*"})
-	methodsOk := handlers.AllowedMethods([]string{"POST", "OPTIONS"})
-
-	router := mux.NewRouter()
-
-	service.Route(router, new(email.EmailService))
-	service.Route(router, new(predictor.PredictorService))
-
-	http.ListenAndServe(":" + os.Getenv("PORT"), handlers.CORS(originsOk, headersOk, methodsOk) (router))
+	lambda.Start(Handler)
 }
